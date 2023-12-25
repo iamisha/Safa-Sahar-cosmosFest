@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateCustomerInput {
+  location: String!
+}
+
 input CreateDriverInput {
   location: String!
 }
@@ -14,11 +18,17 @@ input CreateMailInput {
 }
 
 input CreateUserInput {
-  avatar: Float!
   email: String!
   password: String!
   phone: String!
   username: String!
+}
+
+type Customer {
+  createdAt: DateTime!
+  id: ID!
+  location: String!
+  updatedAt: DateTime!
 }
 
 """
@@ -31,6 +41,11 @@ type Driver {
   id: ID!
   location: String!
   updatedAt: DateTime!
+}
+
+type GetCustomerType {
+  count: Float
+  data: [Customer!]
 }
 
 type GetDriverType {
@@ -89,11 +104,14 @@ type Mail {
 
 type Mutation {
   SignUp(input: SignUpInput!): User!
+  createCustomer(input: CreateCustomerInput!): Customer!
   createDriver(input: CreateDriverInput!): Driver!
   createMail(input: CreateMailInput!): Mail!
+  createManyCustomer(input: [CreateCustomerInput!]!): [Customer!]!
   createManyDriver(input: [CreateDriverInput!]!): [Driver!]!
   createManyUsers(input: [CreateUserInput!]!): [User!]!
   createUser(input: CreateUserInput!): User!
+  deleteCustomer(id: Float!): Customer!
   deleteDriver(id: Float!): Driver!
   deleteMail(id: Float!): Mail!
   deleteUser(id: Float!): JSON!
@@ -102,6 +120,7 @@ type Mutation {
   requestOtpVerify(email: String!, otpType: String!): Boolean!
   resetPassword(newPassword: String!, token: String!): Boolean!
   signIn(input: SignInInput!): JwtWithUser!
+  updateCustomer(id: Float!, input: UpdateCustomerInput!): Customer!
   updateDriver(id: Float!, input: UpdateDriverInput!): Driver!
   updateMail(id: Float!, input: UpdateMailInput!): Mail!
   updateMe(input: UpdateUserInput!): User!
@@ -110,9 +129,11 @@ type Mutation {
 }
 
 type Query {
+  getManyCustomers(input: GetManyInput): GetCustomerType!
   getManyDrivers(input: GetManyInput): GetDriverType!
   getManyUsers(input: GetManyInput): GetUserType!
   getMe: User!
+  getOneCustomer(input: GetOneInput!): Customer!
   getOneDriver(input: GetOneInput!): Driver!
   getOneUser(input: GetOneInput!): User!
 }
@@ -130,6 +151,10 @@ input SignUpInput {
   username: String!
 }
 
+input UpdateCustomerInput {
+  location: String!
+}
+
 input UpdateDriverInput {
   location: String!
 }
@@ -142,7 +167,6 @@ input UpdateMailInput {
 }
 
 input UpdateUserInput {
-  avatar: Float
   email: String
   password: String
   phone: String
@@ -150,7 +174,6 @@ input UpdateUserInput {
 }
 
 type User {
-  avatar: Float!
   createdAt: DateTime!
   email: String!
   email_verified: Boolean!
