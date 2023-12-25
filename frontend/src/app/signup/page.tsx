@@ -82,7 +82,7 @@ const Signup: React.FC = () => {
             </Button>
 
             <Button type="button" onClick={handleReset}>
-              Log In
+              LogIn
             </Button>
 
             <Button type="button" onClick={handleReset}>
