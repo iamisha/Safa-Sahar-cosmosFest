@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -10,6 +11,7 @@ import {
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { User } from 'src/user/entities/user.entity';
 import { State } from 'src/driver/inputs/status.enum';
+import { Dustbin } from 'src/dustbin/entities/dustbin.entity';
 
 @ObjectType()
 @Entity()
@@ -34,6 +36,10 @@ export class Driver {
   @OneToOne(() => User, { onDelete: 'CASCADE', eager: true })
   @JoinColumn({ name: 'user_id' }) // 'user_id' should be a string
   user: User;
+
+  @Field(()=>Dustbin)
+  @OneToMany(() => Dustbin, (dustbin) => dustbin.driver)
+  dustbins: Dustbin[];
 
   @Field()
   @CreateDateColumn({

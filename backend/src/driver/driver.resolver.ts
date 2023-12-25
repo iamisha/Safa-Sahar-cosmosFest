@@ -71,6 +71,11 @@ export class DriverResolver {
     return this.driverService.update(user.id, input);
   }
 
+  @Mutation(() => Driver)
+  @UseGuards(new GraphqlPassportAuthGuard('user'))
+  async acceptDustbin(@CurrentUser() user: User) {
+    return this.driverService.acceptDustbin(user);
+  }
 
 
   @Mutation(() => Driver)

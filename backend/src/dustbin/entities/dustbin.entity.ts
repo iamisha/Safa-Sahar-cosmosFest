@@ -2,11 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Status } from '../inputs/status.enum';
+import { Driver } from 'src/driver/entities/driver.entity';
 
 @ObjectType()
 @Entity()
@@ -23,9 +25,13 @@ export class Dustbin {
   @Column()
   longitude: string;
 
-  @Field(()=>Status)
+  @Field(() => Status)
   @Column({ type: 'enum', enum: Status, default: Status.empty })
   status: Status;
+
+  @Field(() => Driver)
+  @ManyToOne(() => Driver, (driver) => driver.dustbins)
+  driver: Driver;
 
   @Field()
   @CreateDateColumn({

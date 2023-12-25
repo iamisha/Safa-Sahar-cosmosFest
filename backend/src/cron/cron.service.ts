@@ -13,7 +13,7 @@ export class CronService {
     private readonly mailService: MailService,
   ) {}
 
-  @Cron('*/1000000 * * * * *')
+  @Cron('*/1000000000000 * * * * *')
   async checkDustbinStatusAndNotifyDriver() {
     const dustbin = await this.dustbinService.checkDustbinStatus();
     if(dustbin===null){
@@ -22,6 +22,11 @@ export class CronService {
     const driver = await this.driverRepository.findOne({ where: { state: State.idle } });
     if (dustbin && driver) {
       this.mailService.sendEmptyMessage(dustbin,driver.user.email)
+      if (!driver.dustbins) {
+        driver.dustbins = [];
+      }
+      driver.dustbins.push(dustbin);
+      this.driverRepository.save(driver);
       return {status:'success'}
     }
   }

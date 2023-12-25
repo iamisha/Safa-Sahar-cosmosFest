@@ -6,6 +6,8 @@ import { CreateDriverInput, UpdateDriverInput } from './inputs/driver.input';
 
 import { FindOneOptions } from 'typeorm';
 import { User } from 'src/user/entities/user.entity';
+import { State } from './inputs/status.enum';
+import { CurrentUser } from '../modules/decorators/user.decorator';
 @Injectable()
 export class DriverService {
   constructor(private readonly driverRepository: DriverRepository) {}
@@ -42,5 +44,14 @@ export class DriverService {
     const driver = this.driverRepository.findOne({ where: { id } });
     await this.driverRepository.delete({ id });
     return driver;
+  }
+
+  async acceptDustbin(currentUser:User) {
+    const driver = await this.driverRepository.findOne({ where: { user: {id: currentUser.id} } });
+    if(!driver){
+      return {status:'no driver profile found'}
+    }
+    driver.state = State.busy;
+    return this.driverRepository.save(driver);
   }
 }

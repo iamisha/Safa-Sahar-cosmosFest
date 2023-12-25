@@ -48,6 +48,7 @@ scalar DateTime
 
 type Driver {
   createdAt: DateTime!
+  dustbins: Dustbin!
   id: ID!
   latitude: String!
   longitude: String!
@@ -58,6 +59,7 @@ type Driver {
 
 type Dustbin {
   createdAt: DateTime!
+  driver: Driver!
   id: ID!
   latitude: String!
   longitude: String!
@@ -131,6 +133,7 @@ type Mail {
 
 type Mutation {
   SignUp(input: SignUpInput!): User!
+  acceptDustbin: Driver!
   createCustomer(input: CreateCustomerInput!): Customer!
   createDriver(input: CreateDriverInput!): Driver!
   createDustbin(input: CreateDustbinInput!): Dustbin!
