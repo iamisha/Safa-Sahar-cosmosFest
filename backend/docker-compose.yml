@@ -1,0 +1,50 @@
+version: '3'
+services:
+  #   app:
+  #     container_name: nestjs_boilerplate
+  #     restart: always
+  #     build: .
+  #     ports:
+  #       - '${PORT}:${PORT}'
+  #     depends_on:
+  #       - postgres
+  #     volumes:
+  #       - type: bind
+  #         source: ./
+  #         target: /app
+  #       # - .:/app
+  #       - node_modules:/app/node_modules
+  #     command: yarn dev
+  postgres:
+    image: postgres
+    container_name: postgres
+    healthcheck:
+      test: [ 'CMD', 'pg_isready', '-U', 'postgres' ]
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      TZ: 'UTC'
+      PGTZ: 'UTC'
+    ports:
+      - '5432:5432'
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      TZ: 'UTC'
+    ports:
+      - '5050:80'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+volumes:
+  node_modules:
+  pgadmin:
+
+
+#docker run -e POSTGRES_HOST="ep-rough-frost-65190913-pooler.us-east-1.postgres.vercel-storage.com" -e POSTGRES_USER="default" -e POSTGRES_PASSWORD="dJjcWSs0eYQ2" -e POSTGRES_DATABASE="verceldb" -p 8000:8000 03879e3b6793e5106ca0501ed1927a216c9a18bd399e67b930fad4941f089693
