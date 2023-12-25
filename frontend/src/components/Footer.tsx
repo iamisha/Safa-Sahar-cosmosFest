@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterContainer = styled.div`
-  background-color: #ff416c; /* Set the background color */
+  background: linear-gradient(to bottom, #ff4b2b,#ff416c); /* Set the background color */
   color: #fff; /* Set the text color */
   padding: 20px; /* Set padding to create space inside the footer */
   text-align: center;
