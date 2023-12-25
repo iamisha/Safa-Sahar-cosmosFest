@@ -29,6 +29,7 @@ type Customer {
   id: ID!
   location: String!
   updatedAt: DateTime!
+  user: User!
 }
 
 """
