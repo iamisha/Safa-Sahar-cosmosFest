@@ -1,3 +1,4 @@
+import { DustbinModule } from './dustbin/dustbin.module';
 import { CustomerModule } from './customer/customer.module';
 import { DriverModule } from './driver/driver.module';
 import { TokenModule } from './token/token.module';
@@ -49,6 +50,7 @@ import { Module } from '@nestjs/common';
     HealthModule,
     DriverModule,
     CustomerModule,
+    DustbinModule,
     OtpModule,
     MailModule,
     TokenModule,
