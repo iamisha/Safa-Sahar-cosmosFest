@@ -3,6 +3,26 @@ import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import './Signup.css'; // Import the CSS file for styling
 
+import { request } from 'graphql-request'
+import { useQuery } from '@tanstack/react-query'
+// import { graphql } from './gql/gql'
+ 
+// postsQueryDocument is now fully typed!
+// const postsQueryDocument = graphql(/* GraphQL */ `
+//   query Posts {
+//     posts {
+//       id
+//       title
+//       author {
+//         id
+//         firstName
+//         lastName
+//       }
+//     }
+//   }
+// `)
+ 
+
 interface SignupFormData {
   username: string;
   email: string;
