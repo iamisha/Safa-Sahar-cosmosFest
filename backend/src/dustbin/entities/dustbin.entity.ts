@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Status } from '../inputs/status.enum';
 
 @ObjectType()
 @Entity()
@@ -17,6 +18,10 @@ export class Dustbin {
   @Field(() => String)
   @Column()
   location: string;
+
+  @Field(()=>Status)
+  @Column({ type: 'enum', enum: Status, default: Status.empty })
+  status: Status;
 
   @Field()
   @CreateDateColumn({

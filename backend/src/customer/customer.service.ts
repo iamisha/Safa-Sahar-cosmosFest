@@ -8,6 +8,7 @@ import {
 } from './inputs/customer.input';
 
 import { FindOneOptions } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
 @Injectable()
 export class CustomerService {
   constructor(private readonly customerRepository: CustomerRepository) {}
@@ -24,9 +25,10 @@ export class CustomerService {
     }
   }
 
-  create(input: CreateCustomerInput): Promise<Customer> {
+  create(input: CreateCustomerInput, currentUser:User): Promise<Customer> {
     const customer = new Customer();
     Object.assign(customer, input);
+    customer.user= currentUser;
     return this.customerRepository.save(customer);
   }
 

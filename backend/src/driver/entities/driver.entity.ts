@@ -19,7 +19,11 @@ export class Driver {
 
   @Field(() => String)
   @Column()
-  location: string;
+  longitude: string;
+
+  @Field(() => String)
+  @Column()
+  latitude: string;
 
   @Field(() => User)
   @OneToOne(() => User, { onDelete: 'CASCADE', eager: true })

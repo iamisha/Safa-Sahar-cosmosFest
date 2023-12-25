@@ -9,9 +9,15 @@ import {
   CreateCustomerInput,
   UpdateCustomerInput,
 } from './inputs/customer.input';
+import { CurrentUser } from 'src/modules/decorators/user.decorator';
+import { User } from 'src/user/entities/user.entity';
+import { CustomerRepository } from './customer.repository';
 @Resolver()
 export class CustomerResolver {
-  constructor(private readonly customerService: CustomerService) {}
+  constructor(
+    private readonly customerService: CustomerService,
+    private readonly customerRepository: CustomerRepository,
+    ) {}
 
   @Query(() => GetCustomerType)
   @UseGuards(new GraphqlPassportAuthGuard('admin'))
@@ -30,13 +36,14 @@ export class CustomerResolver {
     qs: GetOneInput<Customer>,
     @CurrentQuery() query: string,
   ) {
+    
     return this.customerService.getOne(qs, query);
   }
 
   @Mutation(() => Customer)
-  @UseGuards(new GraphqlPassportAuthGuard('admin'))
-  createCustomer(@Args('input') input: CreateCustomerInput) {
-    return this.customerService.create(input);
+  @UseGuards(new GraphqlPassportAuthGuard('user'))
+  createCustomer(@Args('input') input: CreateCustomerInput, @CurrentUser() user:User) {
+    return this.customerService.create(input, user);
   }
 
   @Mutation(() => [Customer])
@@ -55,6 +62,17 @@ export class CustomerResolver {
     @Args('input') input: UpdateCustomerInput,
   ) {
     return this.customerService.update(id, input);
+  }
+
+  @Mutation(() => Customer)
+  @UseGuards(new GraphqlPassportAuthGuard('admin'))
+  async updateDriverProfile(
+    @CurrentUser() user: User,
+    @Args('input') input: UpdateCustomerInput,
+  ) {
+    const driver=await this.customerRepository.findOne({where:{user:{id:user.id}},relations:['user']});
+    if(driver.user.id!==user.id) throw new Error('You are not authorized to perform this action');
+    return this.customerService.update(user.id, input);
   }
 
   @Mutation(() => Customer)
