@@ -3,15 +3,19 @@
 # ------------------------------------------------------
 
 input CreateCustomerInput {
-  location: String!
+  latitude: String!
+  longitude: String!
 }
 
 input CreateDriverInput {
-  location: String!
+  latitude: String!
+  longitude: String!
 }
 
 input CreateDustbinInput {
-  location: String!
+  latitude: String!
+  longitude: String!
+  status: Status!
 }
 
 input CreateMailInput {
@@ -31,7 +35,8 @@ input CreateUserInput {
 type Customer {
   createdAt: DateTime!
   id: ID!
-  location: String!
+  latitude: String!
+  longitude: String!
   updatedAt: DateTime!
   user: User!
 }
@@ -44,7 +49,8 @@ scalar DateTime
 type Driver {
   createdAt: DateTime!
   id: ID!
-  location: String!
+  latitude: String!
+  longitude: String!
   updatedAt: DateTime!
   user: User!
 }
@@ -52,7 +58,9 @@ type Driver {
 type Dustbin {
   createdAt: DateTime!
   id: ID!
-  location: String!
+  latitude: String!
+  longitude: String!
+  status: Status!
   updatedAt: DateTime!
 }
 
@@ -143,6 +151,7 @@ type Mutation {
   signIn(input: SignInInput!): JwtWithUser!
   updateCustomer(id: Float!, input: UpdateCustomerInput!): Customer!
   updateDriver(id: Float!, input: UpdateDriverInput!): Driver!
+  updateDriverProfile(input: UpdateCustomerInput!): Customer!
   updateDustbin(id: Float!, input: UpdateDustbinInput!): Dustbin!
   updateMail(id: Float!, input: UpdateMailInput!): Mail!
   updateMe(input: UpdateUserInput!): User!
@@ -168,23 +177,32 @@ input SignInInput {
 }
 
 input SignUpInput {
-  avatar: Float
   email: String!
   password: String!
   phone: String
   username: String!
 }
 
+enum Status {
+  empty
+  full
+  partial
+}
+
 input UpdateCustomerInput {
-  location: String!
+  latitude: String!
+  longitude: String!
 }
 
 input UpdateDriverInput {
-  location: String!
+  latitude: String!
+  longitude: String!
 }
 
 input UpdateDustbinInput {
-  location: String!
+  latitude: String!
+  longitude: String!
+  status: Status!
 }
 
 input UpdateMailInput {

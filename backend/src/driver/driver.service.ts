@@ -5,6 +5,7 @@ import { Driver } from './entities/driver.entity';
 import { CreateDriverInput, UpdateDriverInput } from './inputs/driver.input';
 
 import { FindOneOptions } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
 @Injectable()
 export class DriverService {
   constructor(private readonly driverRepository: DriverRepository) {}
@@ -21,9 +22,10 @@ export class DriverService {
     }
   }
 
-  create(input: CreateDriverInput): Promise<Driver> {
+  create(input: CreateDriverInput, currentUser: User): Promise<Driver> {
     const driver = new Driver();
     Object.assign(driver, input);
+    driver.user= currentUser;
     return this.driverRepository.save(driver);
   }
 

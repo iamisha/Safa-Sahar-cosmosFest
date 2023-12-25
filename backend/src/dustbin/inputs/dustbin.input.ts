@@ -1,16 +1,34 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
+import { Status } from './status.enum';
 
 @InputType()
 export class CreateDustbinInput {
   @Field(() => String)
   @IsNotEmpty()
-  location: string;
+  latitude: string;
+
+  @Field(() => String)
+  @IsNotEmpty()
+  longitude: string;
+
+  @Field(()=>Status)
+  @IsNotEmpty()
+  status: Status;
 }
 
 @InputType()
 export class UpdateDustbinInput {
   @Field(() => String)
   @IsOptional()
-  location: string;
+  latitude: string;
+
+  @Field(() => String)
+  @IsOptional()
+  longitude: string;
+
+  @Field(()=>Status)
+  @IsOptional()
+  status: Status;
 }
+

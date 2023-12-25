@@ -5,12 +5,20 @@ import { Field, InputType } from '@nestjs/graphql';
 export class CreateDriverInput {
   @Field(() => String)
   @IsNotEmpty()
-  location: string;
+  longitude: string;
+
+  @Field(() => String)
+  @IsNotEmpty()
+  latitude: string;
 }
 
 @InputType()
 export class UpdateDriverInput {
   @Field(() => String)
-  @IsOptional()
-  location: string;
+  @IsNotEmpty()
+  longitude: string;
+
+  @Field(() => String)
+  @IsNotEmpty()
+  latitude: string;
 }

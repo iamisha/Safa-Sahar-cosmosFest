@@ -5,12 +5,20 @@ import { Field, InputType } from '@nestjs/graphql';
 export class CreateCustomerInput {
   @Field(() => String)
   @IsNotEmpty()
-  location: string;
+  longitude: string;
+
+  @Field(() => String)
+  @IsNotEmpty()
+  latitude: string;
 }
 
 @InputType()
 export class UpdateCustomerInput {
   @Field(() => String)
   @IsNotEmpty()
-  location: string;
+  longitude: string;
+
+  @Field(() => String)
+  @IsNotEmpty()
+  latitude: string;
 }

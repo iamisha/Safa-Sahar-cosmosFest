@@ -32,7 +32,4 @@ export class SignUpInput extends SignInInput {
   @MaxLength(10, { message: 'Phone number should be atmost 10 digits long' })
   phone?: string;
 
-  @Field({ nullable: true })
-  @IsOptional()
-  avatar?: number;
 }
