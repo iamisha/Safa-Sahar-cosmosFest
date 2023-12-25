@@ -1,11 +1,20 @@
-import React from 'react'
+"use client";
+import React from 'react';
+import styled from 'styled-components';
+
+const FooterContainer = styled.div`
+  background-color: #ff416c; /* Set the background color */
+  color: #fff; /* Set the text color */
+  padding: 20px; /* Set padding to create space inside the footer */
+  text-align: center;
+`;
 
 const Footer = () => {
   return (
-    <div>
-      Footer
-    </div>
-  )
-}
+    <FooterContainer>
+      &copy; 2023 team TNT. All rights reserved.
+    </FooterContainer>
+  );
+};
 
-export default Footer
+export default Footer;
