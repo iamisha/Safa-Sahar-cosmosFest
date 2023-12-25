@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { User } from 'src/user/entities/user.entity';
+import { State } from 'src/driver/inputs/status.enum';
 
 @ObjectType()
 @Entity()
@@ -24,6 +25,10 @@ export class Driver {
   @Field(() => String)
   @Column()
   latitude: string;
+
+  @Field(()=>State)
+  @Column('enum', { enum: State, default: State.idle })
+  state: State;
 
   @Field(() => User)
   @OneToOne(() => User, { onDelete: 'CASCADE', eager: true })

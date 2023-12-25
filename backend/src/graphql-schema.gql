@@ -51,6 +51,7 @@ type Driver {
   id: ID!
   latitude: String!
   longitude: String!
+  state: State!
   updatedAt: DateTime!
   user: User!
 }
@@ -183,6 +184,11 @@ input SignUpInput {
   username: String!
 }
 
+enum State {
+  busy
+  idle
+}
+
 enum Status {
   empty
   full
@@ -197,6 +203,7 @@ input UpdateCustomerInput {
 input UpdateDriverInput {
   latitude: String!
   longitude: String!
+  state: State!
 }
 
 input UpdateDustbinInput {

@@ -5,9 +5,14 @@ import { Mail } from './entities/mail.entity';
 import { CreateMailInput, UpdateMailInput } from './inputs/mail.input';
 import * as _ from 'lodash';
 import { Mailer, StringFields } from 'src/util/mailer';
+import { DustbinRepository } from '../dustbin/dustbin.repository';
+import axios from 'axios';
+import { Dustbin } from 'src/dustbin/entities/dustbin.entity';
+import { Driver } from 'typeorm';
 @Injectable()
 export class MailService extends Mailer {
-  constructor(private readonly mailRepository: MailRepository) {
+  constructor(private readonly mailRepository: MailRepository,
+    private readonly dustbinRepository: DustbinRepository) {
     super();
   }
 
@@ -62,5 +67,30 @@ export class MailService extends Mailer {
     });
 
     return await this.send({ to: email, mail });
+  }
+
+  async sendEmptyMessage(dustbin: Dustbin, email: string) {
+    // fetch the dustbin's latitude and longitude based on its id
+
+
+    // use an external API to get the location name from the latitude and longitude
+    const response:any = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${dustbin.latitude}&lon=${dustbin.longitude}`);
+    const locationName = response.data.display_name; // adjust this based on the actual response structure
+
+    // fetch the mail template with id 3
+    const mail = await this.mailRepository.findOne({where:{id:3}});
+
+    // replace the {location} placeholder in the html_content field with the actual location name
+    mail.html_content = mail.html_content.replace('{location}', locationName);
+
+    // send the mail to the driver
+    await this.sendMail(mail,email);
+  }
+
+  // implement the sendMail function
+  async sendMail(mail: Mail, email: string) {
+    // use the send function from the parent class to send the mail
+    
+    await this.send({to:email,mail});
   }
 }

@@ -5,6 +5,7 @@ import { Dustbin } from './entities/dustbin.entity';
 import { CreateDustbinInput, UpdateDustbinInput } from './inputs/dustbin.input';
 
 import { FindOneOptions } from 'typeorm';
+import { Status } from './inputs/status.enum';
 @Injectable()
 export class DustbinService {
   constructor(private readonly dustbinRepository: DustbinRepository) {}
@@ -40,5 +41,13 @@ export class DustbinService {
     const dustbin = this.dustbinRepository.findOne({ where: { id } });
     await this.dustbinRepository.delete({ id });
     return dustbin;
+  }
+
+  async checkDustbinStatus(): Promise<Dustbin> {
+    const fullDustbin = await this.dustbinRepository.findOne({ where: { status: Status.full } });
+    if(!fullDustbin){
+      return null;
+    }
+    return fullDustbin;
   }
 }

@@ -11,7 +11,7 @@ export class MailResolver {
   constructor(private readonly mailService: MailService) {}
 
   @Mutation(() => Mail)
-  @UseGuards(new GraphqlPassportAuthGuard('admin'))
+  // @UseGuards(new GraphqlPassportAuthGuard('admin'))
   createMail(@Args('input') input: CreateMailInput) {
     return this.mailService.create(input);
   }

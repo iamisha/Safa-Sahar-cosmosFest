@@ -31,7 +31,7 @@ export class DustbinResolver {
   }
 
   @Mutation(() => Dustbin)
-  @UseGuards(new GraphqlPassportAuthGuard('admin'))
+  // @UseGuards(new GraphqlPassportAuthGuard('admin'))
   createDustbin(@Args('input') input: CreateDustbinInput) {
     return this.dustbinService.create(input);
   }
