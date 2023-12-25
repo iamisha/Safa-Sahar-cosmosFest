@@ -17,7 +17,11 @@ export class Dustbin {
 
   @Field(() => String)
   @Column()
-  location: string;
+  latitude: string;
+
+  @Field(() => String)
+  @Column()
+  longitude: string;
 
   @Field(()=>Status)
   @Column({ type: 'enum', enum: Status, default: Status.empty })

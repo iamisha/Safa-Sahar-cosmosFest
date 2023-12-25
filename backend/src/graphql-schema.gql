@@ -13,7 +13,9 @@ input CreateDriverInput {
 }
 
 input CreateDustbinInput {
-  location: String!
+  latitude: String!
+  longitude: String!
+  status: Status!
 }
 
 input CreateMailInput {
@@ -56,7 +58,8 @@ type Driver {
 type Dustbin {
   createdAt: DateTime!
   id: ID!
-  location: String!
+  latitude: String!
+  longitude: String!
   status: Status!
   updatedAt: DateTime!
 }
@@ -197,7 +200,9 @@ input UpdateDriverInput {
 }
 
 input UpdateDustbinInput {
-  location: String!
+  latitude: String!
+  longitude: String!
+  status: Status!
 }
 
 input UpdateMailInput {

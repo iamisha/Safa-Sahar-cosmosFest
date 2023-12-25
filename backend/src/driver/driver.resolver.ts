@@ -61,7 +61,7 @@ export class DriverResolver {
   }
 
   @Mutation(() => Driver)
-  @UseGuards(new GraphqlPassportAuthGuard('admin'))
+  @UseGuards(new GraphqlPassportAuthGuard('user'))
   async updateDriverProfile(
     @CurrentUser() user: User,
     @Args('input') input: UpdateDriverInput,

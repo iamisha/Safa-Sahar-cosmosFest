@@ -65,7 +65,7 @@ export class CustomerResolver {
   }
 
   @Mutation(() => Customer)
-  @UseGuards(new GraphqlPassportAuthGuard('admin'))
+  @UseGuards(new GraphqlPassportAuthGuard('user'))
   async updateDriverProfile(
     @CurrentUser() user: User,
     @Args('input') input: UpdateCustomerInput,
