@@ -1,4 +1,5 @@
 "use client"
+import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 
 interface SignupFormData {
@@ -28,6 +29,15 @@ const Signup: React.FC = () => {
     }
 
     alert(`Submitted Data:\nUsername: ${username}\nEmail: ${email}\nPassword: ${password}`);
+  };
+
+  const handleReset = () => {
+    // Reset the form fields
+    setFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
   };
 
   return (
@@ -64,9 +74,16 @@ const Signup: React.FC = () => {
           required
         />
 
-        <button type="button" onClick={handleSubmit}>
+        <Button type="button" onClick={handleSubmit}>
           Sign Up
-        </button>
+        </Button>
+
+        <Button type="button" onClick={handleReset}>
+          LogIn
+        </Button>
+        <Button type="button" onClick={handleReset}>
+          Reset Password
+        </Button>
       </form>
     </div>
   );
