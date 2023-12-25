@@ -17,5 +17,5 @@ cd frontend
 #### Start the Project
 
 ```bash
-yarn dev
+$ yarn dev
 ```
