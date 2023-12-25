@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import './Signup.css'; // Import the CSS file for styling
@@ -43,52 +43,54 @@ const Signup: React.FC = () => {
 
   return (
     <div className="signup-container">
-      <h2>Sign Up</h2>
-      <form className="signup-form">
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
+      <div className="signup-form">
+        <h2>Sign Up</h2>
+        <form>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
 
-        <div className="button-row">
-          <Button type="button" onClick={handleSubmit}>
-            Sign Up
-          </Button>
+          <div className="button-row">
+            <Button type="button" onClick={handleSubmit}>
+              Sign Up
+            </Button>
 
-          <Button type="button" onClick={handleReset}>
-            Log In
-          </Button>
+            <Button type="button" onClick={handleReset}>
+              Log In
+            </Button>
 
-          <Button type="button" onClick={handleReset}>
-            Reset Password
-          </Button>
-        </div>
-      </form>
+            <Button type="button" onClick={handleReset}>
+              Forget Password
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
