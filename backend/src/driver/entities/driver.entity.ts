@@ -2,10 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { User } from 'src/user/entities/user.entity';
 
 @ObjectType()
 @Entity()
@@ -17,6 +20,11 @@ export class Driver {
   @Field(() => String)
   @Column()
   location: string;
+
+  @Field(() => User)
+  @OneToOne(() => User, { onDelete: 'CASCADE', eager: true })
+  @JoinColumn({ name: 'user_id' }) // 'user_id' should be a string
+  user: User;
 
   @Field()
   @CreateDateColumn({
