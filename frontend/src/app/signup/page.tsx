@@ -1,6 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
+import './Signup.css'; // Import the CSS file for styling
 
 interface SignupFormData {
   username: string;
@@ -41,9 +42,9 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Sign Up</h2>
-      <form>
+      <form className="signup-form">
         <label htmlFor="username">Username:</label>
         <input
           type="text"
@@ -74,16 +75,19 @@ const Signup: React.FC = () => {
           required
         />
 
-        <Button type="button" onClick={handleSubmit}>
-          Sign Up
-        </Button>
+        <div className="button-row">
+          <Button type="button" onClick={handleSubmit}>
+            Sign Up
+          </Button>
 
-        <Button type="button" onClick={handleReset}>
-          LogIn
-        </Button>
-        <Button type="button" onClick={handleReset}>
-          Reset Password
-        </Button>
+          <Button type="button" onClick={handleReset}>
+            Log In
+          </Button>
+
+          <Button type="button" onClick={handleReset}>
+            Reset Password
+          </Button>
+        </div>
       </form>
     </div>
   );
