@@ -1,0 +1,162 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateDriverInput {
+  location: String!
+}
+
+input CreateMailInput {
+  html_content: String
+  name: String!
+  subject: String!
+  text_content: String!
+}
+
+input CreateUserInput {
+  avatar: Float!
+  email: String!
+  password: String!
+  phone: String!
+  username: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Driver {
+  createdAt: DateTime!
+  id: ID!
+  location: String!
+  updatedAt: DateTime!
+}
+
+type GetDriverType {
+  count: Float
+  data: [Driver!]
+}
+
+input GetManyInput {
+  """count or data or all, default = data"""
+  dataType: String
+
+  """
+  {key: "ASC" or "DESC" or "asc" or "desc" or 1 or -1} or {key: {direction: "ASC" or "DESC" or "asc" or "desc", nulls: "first" or "last" or "FIRST" or "LAST"}}}
+  """
+  order: JSON
+  pagination: IPagination
+  where: JSON
+}
+
+input GetOneInput {
+  where: JSON!
+}
+
+type GetUserType {
+  count: Float
+  data: [User!]
+}
+
+input IPagination {
+  """Started from 0"""
+  page: Int!
+
+  """Size of page"""
+  size: Int!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type JwtWithUser {
+  jwt: String!
+  user: User!
+}
+
+type Mail {
+  createdAt: DateTime!
+  html_content: String!
+  id: ID!
+  name: String!
+  subject: String!
+  text_content: String!
+  updatedAt: DateTime!
+}
+
+type Mutation {
+  SignUp(input: SignUpInput!): User!
+  createDriver(input: CreateDriverInput!): Driver!
+  createMail(input: CreateMailInput!): Mail!
+  createManyDriver(input: [CreateDriverInput!]!): [Driver!]!
+  createManyUsers(input: [CreateUserInput!]!): [User!]!
+  createUser(input: CreateUserInput!): User!
+  deleteDriver(id: Float!): Driver!
+  deleteMail(id: Float!): Mail!
+  deleteUser(id: Float!): JSON!
+  forgotPassword(email: String!): Boolean!
+  logout(accessToken: String!): Boolean!
+  requestOtpVerify(email: String!, otpType: String!): Boolean!
+  resetPassword(newPassword: String!, token: String!): Boolean!
+  signIn(input: SignInInput!): JwtWithUser!
+  updateDriver(id: Float!, input: UpdateDriverInput!): Driver!
+  updateMail(id: Float!, input: UpdateMailInput!): Mail!
+  updateMe(input: UpdateUserInput!): User!
+  updateUser(id: Float!, input: UpdateUserInput!): User!
+  verifyEmail(email: String!, otpCode: String!): Boolean!
+}
+
+type Query {
+  getManyDrivers(input: GetManyInput): GetDriverType!
+  getManyUsers(input: GetManyInput): GetUserType!
+  getMe: User!
+  getOneDriver(input: GetOneInput!): Driver!
+  getOneUser(input: GetOneInput!): User!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input SignUpInput {
+  avatar: Float
+  email: String!
+  password: String!
+  phone: String
+  username: String!
+}
+
+input UpdateDriverInput {
+  location: String!
+}
+
+input UpdateMailInput {
+  html_content: String
+  name: String!
+  subject: String
+  text_content: String
+}
+
+input UpdateUserInput {
+  avatar: Float
+  email: String
+  password: String
+  phone: String
+  username: String
+}
+
+type User {
+  avatar: Float!
+  createdAt: DateTime!
+  email: String!
+  email_verified: Boolean!
+  id: ID!
+  phone: String!
+  role: String!
+  updatedAt: DateTime!
+  username: String!
+}
