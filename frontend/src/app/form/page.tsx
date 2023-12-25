@@ -43,7 +43,7 @@ const Page: React.FC = () => {
             <Components.RightOverlayPanel signinIn={signIn}>
               <Components.Title>Hello, Friend!</Components.Title>
               <Components.Paragraph>
-                Start your journey with Safa Sahar 🌆
+                Start your journey with Safa Sahar
               </Components.Paragraph>
               <Components.GhostButton onClick={() => toggle(false)}>
                 Sign Up
