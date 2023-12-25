@@ -19,3 +19,9 @@ cd frontend
 ```bash
 $ yarn dev
 ```
+
+`resources`:
+
+- https://classic.yarnpkg.com/lang/en/docs
+- https://docs.nestjs.com/
+- https://nextjs.org/docs
