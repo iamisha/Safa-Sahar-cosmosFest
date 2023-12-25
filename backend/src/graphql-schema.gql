@@ -1,0 +1,213 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateCustomerInput {
+  location: String!
+}
+
+input CreateDriverInput {
+  location: String!
+}
+
+input CreateDustbinInput {
+  location: String!
+}
+
+input CreateMailInput {
+  html_content: String
+  name: String!
+  subject: String!
+  text_content: String!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  phone: String!
+  username: String!
+}
+
+type Customer {
+  createdAt: DateTime!
+  id: ID!
+  location: String!
+  updatedAt: DateTime!
+  user: User!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Driver {
+  createdAt: DateTime!
+  id: ID!
+  location: String!
+  updatedAt: DateTime!
+  user: User!
+}
+
+type Dustbin {
+  createdAt: DateTime!
+  id: ID!
+  location: String!
+  updatedAt: DateTime!
+}
+
+type GetCustomerType {
+  count: Float
+  data: [Customer!]
+}
+
+type GetDriverType {
+  count: Float
+  data: [Driver!]
+}
+
+type GetDustbinType {
+  count: Float
+  data: [Dustbin!]
+}
+
+input GetManyInput {
+  """count or data or all, default = data"""
+  dataType: String
+
+  """
+  {key: "ASC" or "DESC" or "asc" or "desc" or 1 or -1} or {key: {direction: "ASC" or "DESC" or "asc" or "desc", nulls: "first" or "last" or "FIRST" or "LAST"}}}
+  """
+  order: JSON
+  pagination: IPagination
+  where: JSON
+}
+
+input GetOneInput {
+  where: JSON!
+}
+
+type GetUserType {
+  count: Float
+  data: [User!]
+}
+
+input IPagination {
+  """Started from 0"""
+  page: Int!
+
+  """Size of page"""
+  size: Int!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type JwtWithUser {
+  jwt: String!
+  user: User!
+}
+
+type Mail {
+  createdAt: DateTime!
+  html_content: String!
+  id: ID!
+  name: String!
+  subject: String!
+  text_content: String!
+  updatedAt: DateTime!
+}
+
+type Mutation {
+  SignUp(input: SignUpInput!): User!
+  createCustomer(input: CreateCustomerInput!): Customer!
+  createDriver(input: CreateDriverInput!): Driver!
+  createDustbin(input: CreateDustbinInput!): Dustbin!
+  createMail(input: CreateMailInput!): Mail!
+  createManyCustomer(input: [CreateCustomerInput!]!): [Customer!]!
+  createManyDriver(input: [CreateDriverInput!]!): [Driver!]!
+  createManyDustbin(input: [CreateDustbinInput!]!): [Dustbin!]!
+  createManyUsers(input: [CreateUserInput!]!): [User!]!
+  createUser(input: CreateUserInput!): User!
+  deleteCustomer(id: Float!): Customer!
+  deleteDriver(id: Float!): Driver!
+  deleteDustbin(id: Float!): Dustbin!
+  deleteMail(id: Float!): Mail!
+  deleteUser(id: Float!): JSON!
+  forgotPassword(email: String!): Boolean!
+  logout(accessToken: String!): Boolean!
+  requestOtpVerify(email: String!, otpType: String!): Boolean!
+  resetPassword(newPassword: String!, token: String!): Boolean!
+  signIn(input: SignInInput!): JwtWithUser!
+  updateCustomer(id: Float!, input: UpdateCustomerInput!): Customer!
+  updateDriver(id: Float!, input: UpdateDriverInput!): Driver!
+  updateDustbin(id: Float!, input: UpdateDustbinInput!): Dustbin!
+  updateMail(id: Float!, input: UpdateMailInput!): Mail!
+  updateMe(input: UpdateUserInput!): User!
+  updateUser(id: Float!, input: UpdateUserInput!): User!
+  verifyEmail(email: String!, otpCode: String!): Boolean!
+}
+
+type Query {
+  getManyCustomers(input: GetManyInput): GetCustomerType!
+  getManyDrivers(input: GetManyInput): GetDriverType!
+  getManyDustbins(input: GetManyInput): GetDustbinType!
+  getManyUsers(input: GetManyInput): GetUserType!
+  getMe: User!
+  getOneCustomer(input: GetOneInput!): Customer!
+  getOneDriver(input: GetOneInput!): Driver!
+  getOneDustbin(input: GetOneInput!): Dustbin!
+  getOneUser(input: GetOneInput!): User!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input SignUpInput {
+  avatar: Float
+  email: String!
+  password: String!
+  phone: String
+  username: String!
+}
+
+input UpdateCustomerInput {
+  location: String!
+}
+
+input UpdateDriverInput {
+  location: String!
+}
+
+input UpdateDustbinInput {
+  location: String!
+}
+
+input UpdateMailInput {
+  html_content: String
+  name: String!
+  subject: String
+  text_content: String
+}
+
+input UpdateUserInput {
+  email: String
+  password: String
+  phone: String
+  username: String
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  email_verified: Boolean!
+  id: ID!
+  phone: String!
+  role: String!
+  updatedAt: DateTime!
+  username: String!
+}
