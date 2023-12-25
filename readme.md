@@ -22,6 +22,12 @@ cd frontend
 $ yarn dev
 ```
 
+#### Technical Stack used:
+
+- Front-End: NextJS, ReactJS (for dashboard visualization)
+- Back-End: NestJS, TypeScript, PostgreSQL (for data storage)
+- Hardware: Ultrasonic sensors, ESP-32
+
 `resources`:
 
 - https://classic.yarnpkg.com/lang/en/docs
