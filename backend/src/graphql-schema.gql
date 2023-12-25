@@ -10,6 +10,10 @@ input CreateDriverInput {
   location: String!
 }
 
+input CreateDustbinInput {
+  location: String!
+}
+
 input CreateMailInput {
   html_content: String
   name: String!
@@ -42,6 +46,14 @@ type Driver {
   id: ID!
   location: String!
   updatedAt: DateTime!
+  user: User!
+}
+
+type Dustbin {
+  createdAt: DateTime!
+  id: ID!
+  location: String!
+  updatedAt: DateTime!
 }
 
 type GetCustomerType {
@@ -52,6 +64,11 @@ type GetCustomerType {
 type GetDriverType {
   count: Float
   data: [Driver!]
+}
+
+type GetDustbinType {
+  count: Float
+  data: [Dustbin!]
 }
 
 input GetManyInput {
@@ -107,13 +124,16 @@ type Mutation {
   SignUp(input: SignUpInput!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
   createDriver(input: CreateDriverInput!): Driver!
+  createDustbin(input: CreateDustbinInput!): Dustbin!
   createMail(input: CreateMailInput!): Mail!
   createManyCustomer(input: [CreateCustomerInput!]!): [Customer!]!
   createManyDriver(input: [CreateDriverInput!]!): [Driver!]!
+  createManyDustbin(input: [CreateDustbinInput!]!): [Dustbin!]!
   createManyUsers(input: [CreateUserInput!]!): [User!]!
   createUser(input: CreateUserInput!): User!
   deleteCustomer(id: Float!): Customer!
   deleteDriver(id: Float!): Driver!
+  deleteDustbin(id: Float!): Dustbin!
   deleteMail(id: Float!): Mail!
   deleteUser(id: Float!): JSON!
   forgotPassword(email: String!): Boolean!
@@ -123,6 +143,7 @@ type Mutation {
   signIn(input: SignInInput!): JwtWithUser!
   updateCustomer(id: Float!, input: UpdateCustomerInput!): Customer!
   updateDriver(id: Float!, input: UpdateDriverInput!): Driver!
+  updateDustbin(id: Float!, input: UpdateDustbinInput!): Dustbin!
   updateMail(id: Float!, input: UpdateMailInput!): Mail!
   updateMe(input: UpdateUserInput!): User!
   updateUser(id: Float!, input: UpdateUserInput!): User!
@@ -132,10 +153,12 @@ type Mutation {
 type Query {
   getManyCustomers(input: GetManyInput): GetCustomerType!
   getManyDrivers(input: GetManyInput): GetDriverType!
+  getManyDustbins(input: GetManyInput): GetDustbinType!
   getManyUsers(input: GetManyInput): GetUserType!
   getMe: User!
   getOneCustomer(input: GetOneInput!): Customer!
   getOneDriver(input: GetOneInput!): Driver!
+  getOneDustbin(input: GetOneInput!): Dustbin!
   getOneUser(input: GetOneInput!): User!
 }
 
@@ -157,6 +180,10 @@ input UpdateCustomerInput {
 }
 
 input UpdateDriverInput {
+  location: String!
+}
+
+input UpdateDustbinInput {
   location: String!
 }
 
