@@ -1,12 +1,23 @@
-import type { CodegenConfig } from '@graphql-codegen/cli'
- 
+import { CodegenConfig } from '@graphql-codegen/cli'
+
 const config: CodegenConfig = {
-   schema: 'https://localhost:4000/graphql',
-   documents: ['src/**/*.tsx'],
-   generates: {
-      './src/gql/': {
-        preset: 'client',
-      }
-   }
+  schema: [
+    {
+      'http://localhost:5000/graphql': {
+      //   headers: {
+      //     'x-hasura-admin-secret': 'nhost-admin-secret',
+      //   },
+      },
+    },
+  ],
+  ignoreNoDocuments: true,
+  generates: {
+    './src/gql/': {
+      documents: ['src/**/*.tsx'],
+      preset: 'client',
+      plugins: [],
+    },
+  },
 }
+
 export default config
