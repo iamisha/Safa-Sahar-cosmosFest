@@ -1,13 +1,19 @@
 "use client"
 
+import img from './trash-solid.svg'
 import React, { useState, useEffect } from 'react';
-import L, { Layer, Map as map} from 'leaflet';
+import L, { LatLng, LatLngExpression, Layer, Map as map} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
 
-import userIconUrl from './user.png';
+// import userIconUrl from './user.png';
 import driverIconUrl from './truck-solid.svg';
 import dustbinIconUrl from './trash-solid.svg';
+import Image from 'next/image';
+
+const dustbin = img.src;
+console.log(dustbin);
+
 
 interface UserData {
   role: string;
@@ -20,10 +26,13 @@ let Map = () => {
   let [user, setUser] = useState<UserData | null>(null);
   let [usersData, setUsersData] = useState<UserData[]>([]);
   let [showPopup, setShowPopup] = useState<boolean>(false);
+  let [latlang, setLatLang] = useState<LatLngExpression>([27.89,87.67]);
 
   useEffect(() => {
     const map = L.map('map');
     map.on('click', (e) => {
+      console.log(e.latlng)
+      setLatLang(e.latlng)
       const popupContent = `
       <div class="w-full max-w-md">
       <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -54,10 +63,11 @@ let Map = () => {
         .openOn(map);
     })
     map.setView([27.67142, 85.3318410], 16);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  const d=  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+    console.log(d);
 
     let userMarker: Layer | undefined, dustbinMarker: Layer | undefined, circle: L.Circle | undefined;
     let driverMarker: Layer | undefined;
@@ -107,6 +117,39 @@ let Map = () => {
     }
 
     getUsersDetails();
+
+    function showDustbins(){
+      map.whenReady(() => {
+        let dustbinIcon = L.icon({
+          iconUrl:dustbin,
+          iconSize: [25, 25],
+          iconAnchor: [12, 12],
+          popupAnchor: [0, 0],
+        });
+        console.log(dustbinIcon)
+
+        dustbinMarker = L.marker(latlang, { icon: dustbinIcon }).addTo(map);
+        console.log("Dustbin drawn")
+        // driverMarker = L.marker([driver_lat, driver_lng], { icon: driverIcon });
+      //   userMarker = L.marker([user_lat, user_lng], { icon: L.icon({ iconUrl: userIconUrl, iconSize: [38, 38], iconAnchor: [19, 38] }) });
+
+      //   userMarker.addTo(map);
+        // driverMarker.addTo(map);
+        console.log(dustbinMarker)
+
+        // circle = L.circle([us  er_lat, user_lng], { radius: accuracy }).addTo(map);
+
+      //   if (!zoomed) {
+      //     zoomed = map.fitBounds(circle.getBounds());
+      //   }
+      dustbinMarker.bindPopup('This is a dustbin', {
+        autoClose: false,
+ // Adjust the values to move the popup above the marker
+      });      
+      
+    })
+  }
+    showDustbins()
 
     function success(pos: GeolocationPosition) {
       let accuracy = pos.coords.accuracy;
