@@ -13,6 +13,7 @@ const Page: React.FC = () => {
             <Components.Title>Create Account</Components.Title>
             <Components.Input type='username' placeholder='Username' />
             <Components.Input type='email' placeholder='Email' />
+            <Components.Input type='number' placeholder='Phone no.' />
             <Components.Input type='password' placeholder='Password' />
             <Components.Button>Sign Up</Components.Button>
           </Components.Form>
