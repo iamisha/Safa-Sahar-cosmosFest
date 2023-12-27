@@ -10,9 +10,9 @@
     "codegen": "graphql-codegen"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.8",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@apollo/client": "^3.8.8",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.2",
